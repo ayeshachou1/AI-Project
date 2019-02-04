@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TTTBoard extends Board {
+public class TTTBoard extends Board{
 
     // Constants
     public static final int ROWS = 3;
@@ -100,7 +100,5 @@ public class TTTBoard extends Board {
             return true;
         else
             return false;
-
     }
-
 }

@@ -6,8 +6,9 @@ import java.util.Random;
  */
 public class BasicAI extends Player {
     private String moveToWin;
+    private String moveToBlock;
     public BasicAI (String name){
-        super(name); moveToWin ="none";
+        super(name); moveToWin ="none"; moveToBlock="none";
     }
 
     public String getMove(Board board) {
@@ -17,6 +18,8 @@ public class BasicAI extends Player {
             location = moveToWin;
 
         }
+        else if(blockOpponent(board))
+            location = moveToBlock;
        // else if (!(blockOpponent((TTTBoard) board).equals("0"))){
 
         // }
@@ -65,11 +68,21 @@ public class BasicAI extends Player {
 
     public boolean blockOpponent(Board gameBoard){
         boolean answer = false;
-        for (int r = 0; r<gameBoard.getRows();r++){
-            for (int c = 0; r<gameBoard.getCols();c++){
+        int count = 0;
+        Board copy = gameBoard;
 
-            }
+        ArrayList<String> a = copy.getEmptyLocs();
+
+        for(int i =0; i<a.size();i++){
+            copy.placePiece(a.get(i),"O");
+            if(copy.isWinner("O"))
+                moveToBlock= a.get(i);
+            copy.retractPiece(a.get(i));
+
         }
+        if(!moveToBlock.equals("none"))
+            answer = true;
+
         return answer;
     }
 }

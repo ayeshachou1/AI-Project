@@ -3,11 +3,11 @@ import java.util.Scanner;
 public class Driver {
     public static void main(String[] args) {
         System.out.println("1. Tic-Tac-Toe (Human vs. Human)");
-        System.out.println("2. Tic-Tac-Toe (Human vs. Beginner AI");
-        System.out.println("3. Tic-Tac-Toe (Human vs. Pro AI");
+        System.out.println("2. Tic-Tac-Toe (Human vs. Beginner AI)");
+        System.out.println("3. Tic-Tac-Toe (Human vs. Pro AI)");
         System.out.println("4. Connect 4 (Human vs. Human)");
-        System.out.println("5. Connect 4 (Human vs. Beginner AI");
-        System.out.println("6. Connect 4 (Human vs. Pro AI");
+        System.out.println("5. Connect 4 (Human vs. Beginner AI)");
+        System.out.println("6. Connect 4 (Human vs. Pro AI)");
         System.out.print("Select your game (1-6): ");
         Scanner in = new Scanner(System.in);
         int gameNumber = in.nextInt();
@@ -16,15 +16,22 @@ public class Driver {
         Board gameBoard = new TTTBoard();
         String answer = "";
         String range = "";
-
+        boolean human = true;
         System.out.println();
-
-        if (gameNumber == 1 || gameNumber == 2 || gameNumber == 3) { //decide if TTT
+        Player ba = new BasicAI("robot");
+        if (gameNumber == 1  || gameNumber == 3) { //decide if TTT
             player1 = "X";
             player2 = "O";
             //gameBoard = new TTTBoard();   switch boards here
             range = "(1-9) : ";
-        } else { // decide if Connect 4
+        }
+        else if(gameNumber ==2) {
+            human = false;
+            player1 = "X";
+            player2 = "O";
+        }
+
+        else { // decide if Connect 4
             player1 = "R";
             player2 = "Y";
             //gameBoard[6][7]; switch boards here
@@ -32,11 +39,13 @@ public class Driver {
         }
 
         String currentPlayer = player1;
-        boolean human = true;
 
         while (gameBoard.isGameOver()) { // running the game
             System.out.print(gameBoard);
-            if (human) {
+            if (!human){
+                answer = ba.getMove(gameBoard);
+            }
+            else if (human) {
                 System.out.print("Enter your move " + range);
                 answer = in.next();
             }
@@ -52,12 +61,12 @@ public class Driver {
                 if (currentPlayer.equals(player1)) { // switches to other player
                     currentPlayer = player2;
                     if (gameNumber != 1) {
-                        human = false;
+                        human = true;
                     }
                 } else {
                     currentPlayer = player1;
                     if (gameNumber != 1)
-                        human = true;
+                        human = false;
                 }
 
                 System.out.println();

@@ -19,13 +19,13 @@ public class Driver {
         boolean human = true;
         System.out.println();
         Player ba = new BasicAI("robot");
-        if (gameNumber == 1  || gameNumber == 3) { //decide if TTT
+        if (gameNumber == 1  ) { //decide if TTT
             player1 = "X";
             player2 = "O";
             //gameBoard = new TTTBoard();   switch boards here
             range = "(1-9) : ";
         }
-        else if(gameNumber ==2) {
+        else if(gameNumber ==2|| gameNumber == 3) {
             human = false;
             player1 = "X";
             player2 = "O";

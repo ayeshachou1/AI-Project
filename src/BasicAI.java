@@ -14,22 +14,30 @@ public class BasicAI extends Player {
     public String getMove(Board board) {
         String location = "";
         Random r = new Random();
-        if (canWin(board)){
+        ArrayList<String> nums = board.getEmptyLocs();
+        if(board.getEmptyLocs().size()==1){
+            location= nums.get(0);
+        }else if (canWin(board)){
             location = moveToWin;
+            System.out.println("win");
 
         }
-        else if(blockOpponent(board))
+        else if(blockOpponent(board)) {
             location = moveToBlock;
-       // else if (!(blockOpponent((TTTBoard) board).equals("0"))){
+            // else if (!(blockOpponent((TTTBoard) board).equals("0"))){
 
-        // }
+            // }
+            System.out.println("block");
+        }
         else{
             int length = board.getEmptyLocs().size();
 
+            System.out.println(nums);
             int rand = r.nextInt(length);
-            ArrayList<String> nums = board.getEmptyLocs();
             location = nums.get(rand);
+
         }
+        System.out.println(location);
         return location;
     }
 
@@ -66,19 +74,21 @@ public class BasicAI extends Player {
         return answer;
     }
 
-    public boolean blockOpponent(Board gameBoard){
+    public boolean blockOpponent(Board gameBoard) {
         boolean answer = false;
         int count = 0;
         Board copy = gameBoard;
 
         ArrayList<String> a = copy.getEmptyLocs();
+        System.out.println(a);
+        if (a.size() > 1) {
+            for (int i = 0; i < a.size(); i++) {
+                copy.placePiece(a.get(i), "O");
+                if (copy.isWinner("O"))
+                    moveToBlock = a.get(i);
+                copy.retractPiece(a.get(i));
 
-        for(int i =0; i<a.size();i++){
-            copy.placePiece(a.get(i),"O");
-            if(copy.isWinner("O"))
-                moveToBlock= a.get(i);
-            copy.retractPiece(a.get(i));
-
+            }
         }
         if(!moveToBlock.equals("none"))
             answer = true;

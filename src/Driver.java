@@ -46,16 +46,9 @@ public class Driver {
                 answer = ba.getMove(gameBoard);
             }
             else if (human) {
-                System.out.print("Enter your move " + range);
+                System.out.print("Enter your move: " + range);
                 answer = in.next();
             }
-                // else{
-                //if (gameNumber == 2){
-
-                // }
-                // else
-                // answer = ProAI getMove
-
                 gameBoard.placePiece(answer, currentPlayer);
 
                 if (currentPlayer.equals(player1)) { // switches to other player

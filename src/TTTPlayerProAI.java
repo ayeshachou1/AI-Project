@@ -35,9 +35,9 @@ public class TTTPlayerProAI extends Player {
         else if(!board.isWinner("X"))
             return new MoveInfo(moveLoc,0);
 
-
-
-        //...
-        return null;
+        if (playerTurn.equals("X"))
+            return max;
+        else
+            return min;
     }
 }

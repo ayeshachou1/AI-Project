@@ -51,7 +51,7 @@ public class TTTPlayerProAI extends Player {
                     min = move;
             }
             board.retractPiece(moveLoc);
-        }
+        } // hi
 
         if (playerTurn.equals("X"))
             return max;

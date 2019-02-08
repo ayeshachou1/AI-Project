@@ -19,6 +19,7 @@ public class Driver {
         boolean human = true;
         System.out.println();
         Player ba = new BasicAI("robot");
+        Player baa = new TTTPlayerProAI("robot");
         if (gameNumber == 1  ) { //decide if TTT
             player1 = "X";
             player2 = "O";
@@ -43,7 +44,10 @@ public class Driver {
         while (gameBoard.isGameOver()) { // running the game
             System.out.print(gameBoard);
             if (!human){
-                answer = ba.getMove(gameBoard);
+                if (gameNumber == 2)
+                    answer = ba.getMove(gameBoard);
+                else
+                    answer = baa.getMove(gameBoard);
             }
             else if (human) {
                 System.out.print("Enter your move: " + range);

@@ -17,6 +17,7 @@ public class TTTPlayerProAI extends Player {
      */
     public String getMove(Board board) {
         MoveInfo mi = recMove( (TTTBoard) board, this.name, "");
+        System.out.println(mi.getLoc());
         return mi.getLoc();
     }
 
@@ -51,7 +52,7 @@ public class TTTPlayerProAI extends Player {
                     min = move;
             }
             board.retractPiece(moveLoc);
-        } // hi
+        }
 
         if (playerTurn.equals("X"))
             return max;

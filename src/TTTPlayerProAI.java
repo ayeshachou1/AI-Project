@@ -35,11 +35,14 @@ public class TTTPlayerProAI extends Player {
             return new MoveInfo(moveLoc, 10);
         else if (board.isWinner("O"))
             return new MoveInfo(moveLoc, -10);
-        else if(!board.isWinner("X"))
+        else if(board.getEmptyLocs().size()==0)
             return new MoveInfo(moveLoc,0);
 
         ArrayList<String> a = board.getEmptyLocs();
-        for (int i = 0; i<a.size();i++){
+
+        for (String i : a){
+            moveLoc =i;
+
             board.placePiece(moveLoc, playerTurn);
             if (playerTurn.equals("O")){
                 MoveInfo move = recMove(board, "O", moveLoc);
@@ -53,6 +56,7 @@ public class TTTPlayerProAI extends Player {
             }
             board.retractPiece(moveLoc);
         }
+
 
         if (playerTurn.equals("X"))
             return max;

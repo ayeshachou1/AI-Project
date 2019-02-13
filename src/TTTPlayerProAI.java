@@ -31,6 +31,7 @@ public class TTTPlayerProAI extends Player {
     private MoveInfo recMove(TTTBoard board, String playerTurn, String moveLoc) {
         MoveInfo max = new MoveInfo(moveLoc, -10);
         MoveInfo min = new MoveInfo(moveLoc, 10);
+        board.placePiece(moveLoc, playerTurn);
         if(board.isWinner("X"))
             return new MoveInfo(moveLoc, 10);
         else if (board.isWinner("O"))
@@ -40,11 +41,12 @@ public class TTTPlayerProAI extends Player {
 
         ArrayList<String> a = board.getEmptyLocs();
         //heisk
+
         for (String i : a){
             moveLoc =i;
 
             board.placePiece(moveLoc, playerTurn);
-            if (playerTurn.equals("O")){
+            if (playerTurn.equals("X")){
                 MoveInfo move = recMove(board, "O", moveLoc);
                 if (move.getScore() > max.getScore())
                     max = move;
@@ -58,9 +60,10 @@ public class TTTPlayerProAI extends Player {
         }
 
 
-        if (playerTurn.equals("X"))
+        if (playerTurn.equals("X")) {
             return max;
-        else
+        } else {
             return min;
+        }
     }
 }

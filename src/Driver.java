@@ -48,6 +48,7 @@ public class Driver {
                     answer = ba.getMove(gameBoard);
                 else
                     answer = baa.getMove(gameBoard);
+
             }
             else if (human) {
                 System.out.print("Enter your move: " + range);

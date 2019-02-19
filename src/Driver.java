@@ -50,7 +50,7 @@ public class Driver {
                     answer = baa.getMove(gameBoard);
 
             }
-            else if (human) {
+            else {
                 System.out.print("Enter your move: " + range);
                 answer = in.next();
             }
@@ -66,7 +66,6 @@ public class Driver {
                     if (gameNumber != 1)
                         human = false;
                 }
-
                 System.out.println();
 
                 if (gameBoard.isWinner(player1)) {

@@ -52,16 +52,17 @@ public class Connect4Board extends Board {
      * @param loc the location to reset
      */
     public void retractPiece(String loc) {
-        int currentLoc = 1;
+        int num = Integer.parseInt(loc);
 
-        for (int r = 0; r < ROWS; r++) {
-            for (int c = 0; c < COLS; c++) {
-                if (String.valueOf(currentLoc).equals(loc))
-                    theBoard[r][c] = loc;
 
-                currentLoc++;
+        for (int r = 1; r <ROWS; r++) {
+            if(!theBoard[r][num-1].equals("-")) {
+                theBoard[r][num - 1].equals("-");
+                r= ROWS;
             }
-        }
+
+            }
+
     }
 
     /**

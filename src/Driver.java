@@ -20,6 +20,7 @@ public class Driver {
         System.out.println();
         Player ba = new BasicAI("X");
         Player baa = new TTTPlayerProAI("X");
+        Player connectBAI = new BasicAIConnect4("R");
         if (gameNumber == 1  ) { //decide if TTT
             player1 = "X";
             player2 = "O";
@@ -43,6 +44,7 @@ public class Driver {
             player2 = "Y";
             gameBoard = new Connect4Board();
             //gameBoard[6][7]; switch boards here
+            human = false;
             range = "(1-7) : ";
         }
 
@@ -53,8 +55,11 @@ public class Driver {
             if (!human){
                 if (gameNumber == 2)
                     answer = ba.getMove(gameBoard);
-                else
+                else if(gameNumber==3)
                     answer = baa.getMove(gameBoard);
+                else if(gameNumber ==5){
+                    answer = connectBAI.getMove(gameBoard);
+                }
 
             }
             else {
@@ -65,12 +70,11 @@ public class Driver {
 
                 if (currentPlayer.equals(player1)) { // switches to other player
                     currentPlayer = player2;
-                    if (gameNumber == 1 || gameNumber ==4) {
                         human = true;
-                    }
+
                 } else {
                     currentPlayer = player1;
-                    if (gameNumber != 1 &&gameNumber!=4)
+                    if (gameNumber ==2 || gameNumber==3)
                         human = false;
                 }
                 System.out.println();
@@ -93,8 +97,8 @@ public class Driver {
             }
 
             System.out.println("-- End of Game --");
-            gameBoard.retractPiece(player1); // clears board of player1
-            gameBoard.retractPiece(player2); // clears board of player2
+            //gameBoard.retractPiece(player1); // clears board of player1
+            //gameBoard.retractPiece(player2); // clears board of player2
 
         }
 

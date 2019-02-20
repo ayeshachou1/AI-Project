@@ -18,8 +18,8 @@ public class Driver {
         String range = "";
         boolean human = true;
         System.out.println();
-        Player ba = new BasicAI("robot");
-        Player baa = new TTTPlayerProAI("robot");
+        Player ba = new BasicAI("X");
+        Player baa = new TTTPlayerProAI("X");
         if (gameNumber == 1  ) { //decide if TTT
             player1 = "X";
             player2 = "O";
@@ -32,9 +32,16 @@ public class Driver {
             player2 = "O";
         }
 
-        else { // decide if Connect 4
+        else if(gameNumber ==4){ // decide if Connect 4
             player1 = "R";
             player2 = "Y";
+            gameBoard = new Connect4Board(); //gameBoard[6][7]; switch boards here
+            range = "(1-7) : ";
+        }
+        else if(gameNumber ==5){ // decide if Connect 4
+            player1 = "R";
+            player2 = "Y";
+            gameBoard = new Connect4Board();
             //gameBoard[6][7]; switch boards here
             range = "(1-7) : ";
         }
@@ -58,12 +65,12 @@ public class Driver {
 
                 if (currentPlayer.equals(player1)) { // switches to other player
                     currentPlayer = player2;
-                    if (gameNumber != 1) {
+                    if (gameNumber == 1 || gameNumber ==4) {
                         human = true;
                     }
                 } else {
                     currentPlayer = player1;
-                    if (gameNumber != 1)
+                    if (gameNumber != 1 &&gameNumber!=4)
                         human = false;
                 }
 

@@ -40,7 +40,7 @@ public class TTTPlayerProAI extends Player {
             return new MoveInfo(moveLoc,0);
 
         ArrayList<String> a = board.getEmptyLocs();
-        //heisk
+
 
         for (String i : a){
             moveLoc =i;

@@ -57,7 +57,7 @@ public class Connect4Board extends Board {
 
         for (int r = 1; r <ROWS; r++) {
             if(!theBoard[r][num-1].equals("-")) {
-                theBoard[r][num - 1].equals("-");
+                theBoard[r][num - 1]= ("-");
                 r= ROWS;
             }
 

@@ -68,13 +68,14 @@ public class Driver {
             }
                 gameBoard.placePiece(answer, currentPlayer);
 
+
                 if (currentPlayer.equals(player1)) { // switches to other player
                     currentPlayer = player2;
-                        human = true;
+                    human = true;
 
                 } else {
                     currentPlayer = player1;
-                    if (gameNumber ==2 || gameNumber==3)
+                    if (gameNumber ==2 || gameNumber==3 || gameNumber==5)
                         human = false;
                 }
                 System.out.println();

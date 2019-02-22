@@ -31,6 +31,7 @@ public class BasicAIConnect4 extends Player {
              while (!board.get(1, rand).equals("-"))
                  rand = r.nextInt(length);// - need stomething that knows when it is the top - doesnt work at the top of the connect four board
             location = Integer.toString(rand+1);
+             //homie
         }
         return location;
     }

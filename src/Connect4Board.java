@@ -38,12 +38,14 @@ public class Connect4Board extends Board {
      */
     public void placePiece(String loc, String player) {
         int num = Integer.parseInt(loc) -1;
-            for (int c = COLS-1; c > 0; c--) {
+
+            for (int c = COLS - 1; c > 0; c--) {
                 if (theBoard[c][num].equals("-")) {
                     theBoard[c][num] = player;
                     c = -1;
                 }
             }
+
 
     }
 
@@ -73,7 +75,7 @@ public class Connect4Board extends Board {
 
         for(int r = 0; r < theBoard.length; r++) {
             for(int c = 0; c < theBoard[0].length; c++) {
-                if(!theBoard[r][c].equals("Y") && !theBoard[r][c].equals("O"))
+                if(!theBoard[r][c].equals("Y") && !theBoard[r][c].equals("R"))
                     empty.add((String) theBoard[r][c]);
             }
         }

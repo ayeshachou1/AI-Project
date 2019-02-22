@@ -16,19 +16,21 @@ public class BasicAIConnect4 extends Player {
         Random r = new Random();
         ArrayList<String> nums = board.getEmptyLocs();
 
-         if (canWin(board)){
+         if (canWin(board) && !board.get(1,Integer.parseInt(moveToWin)-1).equals("R") && !board.get(1,Integer.parseInt(moveToWin)-1).equals("Y")){
             location = moveToWin;
             System.out.println("win");
 
         }
-        else if(blockOpponent(board)) {
+        else if(blockOpponent(board) && !board.get(1,Integer.parseInt(moveToBlock)-1).equals("R") && !board.get(1,Integer.parseInt(moveToBlock)-1).equals("Y")) {
             location = moveToBlock;
             System.out.println("block");
         }
         else{
             int length = 7;
-            int rand = r.nextInt(length);// - need stomething that knows when it is the top - doesnt work at the top of the connect four board
-            location = nums.get(rand);
+            int rand = r.nextInt(length);
+             while (!board.get(1, rand).equals("-"))
+                 rand = r.nextInt(length);// - need stomething that knows when it is the top - doesnt work at the top of the connect four board
+            location = Integer.toString(rand+1);
         }
         return location;
     }
@@ -36,6 +38,8 @@ public class BasicAIConnect4 extends Player {
     private boolean canWin(Board gameBoard){
         boolean answer = false;
         for (int c = gameBoard.getCols(); c > 0; c--) {
+
+
             String num = Integer.toString(c);
             gameBoard.placePiece(num,"R");
             if(gameBoard.isWinner("R")) {
@@ -53,6 +57,8 @@ public class BasicAIConnect4 extends Player {
     public boolean blockOpponent(Board gameBoard) {
         boolean answer = false;
         for (int c = gameBoard.getCols(); c > 0; c--) {
+
+
             String num = Integer.toString(c);
             gameBoard.placePiece(num,"Y");
             if(gameBoard.isWinner("Y")) {

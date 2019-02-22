@@ -29,7 +29,7 @@ public class BasicAIConnect4 extends Player {
             int length = 7;
             int rand = r.nextInt(length);
              while (!board.get(1, rand).equals("-"))
-                 rand = r.nextInt(length);// - need stomething that knows when it is the top - doesnt work at the top of the connect four board
+                 rand = r.nextInt(length);
             location = Integer.toString(rand+1);
              //homie
         }
@@ -58,9 +58,10 @@ public class BasicAIConnect4 extends Player {
     public boolean blockOpponent(Board gameBoard) {
         boolean answer = false;
         for (int c = gameBoard.getCols(); c > 0; c--) {
-
-
+            if(getTopRow(c,gameBoard)==-1)
+                c--;
             String num = Integer.toString(c);
+
             gameBoard.placePiece(num,"Y");
             if(gameBoard.isWinner("Y")) {
                 moveToBlock = num;
@@ -71,5 +72,12 @@ public class BasicAIConnect4 extends Player {
         if(!moveToBlock.equals("none"))
             answer = true;
         return answer;
+    }
+    public int getTopRow(int c, Board gameBoard){
+        for (int r = 0; r > gameBoard.getRows(); r++) {
+            if(gameBoard.get(r,c).equals("-"))
+                return r;
+        }
+        return -1;
     }
 }

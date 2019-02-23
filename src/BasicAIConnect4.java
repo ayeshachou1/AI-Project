@@ -71,6 +71,20 @@ public class BasicAIConnect4 extends Player {
         return answer;
     }
 
+    public ArrayList<Integer> allAvaliableMoves (Board gameboard){
+        ArrayList<Integer> avaliable = new ArrayList<>();
+        for (int c = 0; c<gameboard.getCols();c++){
+            for (int r = gameboard.getRows()-1; r>0;r--){
+                if(gameboard.get(r, c).equals("-")){
+                    avaliable.add(r);
+                    r = 0;
+                }
+            }
+        }
+        System.out.println(avaliable);
+        return avaliable;
+    }
+
     public boolean avaliableMoves (int c, Board gameboard){
         boolean answer = false;
         int num = 0;

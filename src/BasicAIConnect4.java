@@ -16,40 +16,38 @@ public class BasicAIConnect4 extends Player {
         Random r = new Random();
         ArrayList<String> nums = board.getEmptyLocs();
 
-         if (canWin(board) && !board.get(1,Integer.parseInt(moveToWin)-1).equals("R") && !board.get(1,Integer.parseInt(moveToWin)-1).equals("Y")){
+        if (canWin(board) ){
             location = moveToWin;
             System.out.println("win");
 
         }
-        else if(blockOpponent(board) && !board.get(1,Integer.parseInt(moveToBlock)-1).equals("R") && !board.get(1,Integer.parseInt(moveToBlock)-1).equals("Y")) {
+        else if(blockOpponent(board) ) {
             location = moveToBlock;
             System.out.println("block");
         }
         else{
             int length = 7;
             int rand = r.nextInt(length);
-             while (!board.get(1, rand).equals("-"))
-                 rand = r.nextInt(length);
+            while (!board.get(1, rand).equals("-"))
+                rand = r.nextInt(length);
             location = Integer.toString(rand+1);
-             //homie
         }
         return location;
     }
 
-    private boolean canWin(Board gameBoard){
+    private boolean canWin(Board gameBoard) {
         boolean answer = false;
-        for (int c = gameBoard.getCols(); c > 0; c--) {
-
-
-            String num = Integer.toString(c);
-            gameBoard.placePiece(num,"R");
-            if(gameBoard.isWinner("R")) {
-                moveToWin = num;
-                c = -1;
+        for (int c = gameBoard.getCols()-1; c >= 0; c--) {
+            if (avaliableMoves(c, gameBoard)){
+                String num = Integer.toString(c);
+                gameBoard.placePiece(num, "R");
+                if (gameBoard.isWinner("R")) {
+                    moveToWin = num;
+                }
+                gameBoard.retractPiece(num);
             }
-            gameBoard.retractPiece(num);
-
-        }
+            break;
+    }
         if(!moveToWin.equals("none"))
             answer = true;
         return answer;
@@ -57,27 +55,34 @@ public class BasicAIConnect4 extends Player {
 
     public boolean blockOpponent(Board gameBoard) {
         boolean answer = false;
-        for (int c = gameBoard.getCols(); c > 0; c--) {
-            if(getTopRow(c,gameBoard)==-1)
-                c--;
-            String num = Integer.toString(c);
-
-            gameBoard.placePiece(num,"Y");
-            if(gameBoard.isWinner("Y")) {
-                moveToBlock = num;
-                c =-1;
+        for (int c = gameBoard.getCols()-1; c >= 0; c--) {
+            if (avaliableMoves(c, gameBoard)) {
+                String num = Integer.toString(c);
+                gameBoard.placePiece(num, "Y");
+                if (gameBoard.isWinner("Y")) {
+                    moveToBlock = num;
+                }
+                gameBoard.retractPiece(num);
             }
-            gameBoard.retractPiece(num);
+            break;
         }
         if(!moveToBlock.equals("none"))
             answer = true;
         return answer;
     }
-    public int getTopRow(int c, Board gameBoard){
-        for (int r = 0; r > gameBoard.getRows(); r++) {
-            if(gameBoard.get(r,c).equals("-"))
-                return r;
+
+    public boolean avaliableMoves (int c, Board gameboard){
+        boolean answer = false;
+        int num = 0;
+        for (int r = 1; r<gameboard.getRows();r++){
+            if (gameboard.get(r, c) == ("-"))
+                num++;
         }
-        return -1;
+
+        if (num == 0)
+            answer = false;
+        else
+            answer = true;
+        return answer;
     }
 }
